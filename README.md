@@ -101,6 +101,3 @@ https://github.com/SHAXIAOGUANG-AI/user-behavior-analysis
 ---
 
 ⭐ If you like this project, please consider giving it a star!
-
-## 👤 Author
-    熊义清
