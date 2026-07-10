@@ -1,103 +1,77 @@
-# 📊 User Behavior Analysis (用户行为分析项目)
+# User Behavior Analysis
 
-## 📌 Project Overview
-This project analyzes user behavior data from an e-commerce platform to understand customer purchasing patterns and provide data-driven business insights. The goal is to improve conversion rate, user retention, and revenue performance.
+## Project Overview
 
-本项目基于电商用户行为数据，对用户的浏览、加购和购买行为进行分析，并通过用户分群与转化分析提供商业决策支持。
+This project analyzes 100,000+ e-commerce user behavior records, including browsing, cart, and purchase events. The goal is to understand user conversion, product and brand performance, price sensitivity, and customer value, then provide data-driven business recommendations.
 
----
+## Dataset
 
-## 📁 Dataset
-- **Source:** 2019-Nov.csv  
-- **Scale:** ~100,000+ user interaction records  
+- Source: `2019-Nov.csv`
+- Scale: 100,000+ user interaction records
+- Key fields: `user_id`, `event_type`, `product_id`, `category_id`, `brand`, `price`, `event_time`, `user_session`
 
-### 📌 Key Fields:
-- user_id
-- event_type (view / cart / purchase)
-- product_id
-- category_id
-- price
-- timestamp
+## Analysis Workflow
 
----
+1. Data cleaning: missing values, timestamp conversion, abnormal price check.
+2. EDA: event distribution, product performance, brand interaction, price distribution.
+3. Funnel analysis: `view -> cart -> purchase` conversion path.
+4. Price analysis: purchase conversion by price range.
+5. RFM analysis: customer value scoring and segmentation.
+6. Business recommendations: conversion, pricing, retention, and reactivation strategies.
 
-## 🗂 Project Structure
-User-Behavior-Analysis/
-│
-├── data/ # Raw dataset (not uploaded to GitHub)
-├── notebook/ # Jupyter analysis process
-├── src/ # Reusable code modules
-├── images/ # Visualization results
-├── README.md # Project description
----
+## Visualizations
 
-## 🔍 Analysis Workflow
+### User Behavior Funnel
 
-### 1️⃣ Data Cleaning
-- Remove missing or invalid values
-- Convert timestamp format
-- Filter abnormal records
+![User Behavior Funnel](images/behavior_funnel.png)
 
----
+### Price Range Conversion
 
-### 2️⃣ Exploratory Data Analysis (EDA)
-- User activity distribution
-- Event type distribution (View / Cart / Purchase)
-- Top products and categories
+![Price Range Conversion](images/price_range_conversion.svg)
 
----
+### RFM Customer Segmentation
 
-### 3️⃣ Funnel Analysis
-- View → Cart → Purchase conversion funnel
-- Identify drop-off points in user journey
+![RFM Customer Segmentation](images/rfm_segments.png)
 
----
+### Brand Purchase Rate
 
-### 4️⃣ RFM Analysis
-- **Recency:** Last purchase time  
-- **Frequency:** Purchase frequency  
-- **Monetary:** Total spending  
+![Brand Purchase Rate](images/brand_purchase_rate.png)
 
-Customer segmentation:
-- Champions
-- Loyal Users
-- At-risk Users
+## Key Insights
 
----
+- Overall purchase conversion rate is low, about 1.46%, showing clear room for funnel optimization.
+- The main loss occurs after browsing, before users add products to cart.
+- Products in the 100-300 price range show the highest purchase conversion rate.
+- RFM segmentation identifies Champion, Loyal, Big Spender, Recent, Potential, and At Risk users.
+- High-value users contribute stronger purchase frequency and monetary value, while At Risk users require reactivation.
 
-## 📊 Key Insights
+## Business Recommendations
 
-- Overall conversion rate is low (~1.4%)
-- Most users only browse without purchasing
-- A small group of “Champion users” contributes most revenue
-- Mid-price products (100–300) perform best in conversion
-- User value distribution is highly concentrated
+- Optimize product detail pages and recommendation logic to improve view-to-cart conversion.
+- Focus marketing and inventory resources on the 100-300 price range.
+- Build VIP benefits and personalized offers for Champion and Loyal users.
+- Use coupons, push notifications, and remarketing campaigns to reactivate At Risk users.
+- Compare high-traffic brands and high-conversion brands separately when planning advertising budget.
 
----
+## Tools
 
-## 💡 Business Recommendations
-
-- Improve conversion from view → cart stage
-- Strengthen retention strategies for high-value users
-- Optimize pricing strategy for mid-range products
-- Launch targeted promotions for at-risk users
-
----
-
-## 🛠 Tools & Technologies
 - Python
 - Pandas
-- Matplotlib / Seaborn
+- Matplotlib
 - Jupyter Notebook
 
----
+## Project Structure
 
-## 👨‍💻 Author
-**SHAXIAOGUANG-AI**
+```text
+User-Behavior-Analysis/
+|-- data/          # Raw dataset, not uploaded
+|-- images/        # Visualization results
+|-- notebook/      # Jupyter analysis notebook
+`-- README.md      # Project documentation
+```
 
-🔗 Project Link:  
-https://github.com/SHAXIAOGUANG-AI/user-behavior-analysis
+## Author
 
----
+SHAXIAOGUANG-AI
 
-⭐ If you like this project, please consider giving it a star!
+Project link: https://github.com/SHAXIAOGUANG-AI/user-behavior-analysis
