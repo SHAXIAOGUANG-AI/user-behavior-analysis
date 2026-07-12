@@ -1,77 +1,87 @@
-# User Behavior Analysis
+# E-commerce User Behavior Analysis
 
-## Project Overview
+Personal data-analysis project based on 100,000+ e-commerce user behavior records. The project uses Python to clean event data, analyze conversion and price performance, segment customer value with RFM, and turn findings into business recommendations.
 
-This project analyzes 100,000+ e-commerce user behavior records, including browsing, cart, and purchase events. The goal is to understand user conversion, product and brand performance, price sensitivity, and customer value, then provide data-driven business recommendations.
+## At a glance
 
-## Dataset
+| Item | Result |
+| --- | --- |
+| Dataset | 100,000+ sampled records from `2019-Nov.csv` |
+| User journey | `view → cart → purchase` |
+| Overall purchase conversion | about 1.46% of viewing users in this project sample |
+| Key drop-off | from product view to add-to-cart |
+| Highest-converting price band | 100–300 in this project sample |
+| Customer analysis | RFM segmentation for retention and reactivation |
 
-- Source: `2019-Nov.csv`
-- Scale: 100,000+ user interaction records
-- Key fields: `user_id`, `event_type`, `product_id`, `category_id`, `brand`, `price`, `event_time`, `user_session`
+> Findings are based on this project's sampled public event data. They are not results from a production experiment.
 
-## Analysis Workflow
+## Business questions
 
-1. Data cleaning: missing values, timestamp conversion, abnormal price check.
-2. EDA: event distribution, product performance, brand interaction, price distribution.
-3. Funnel analysis: `view -> cart -> purchase` conversion path.
-4. Price analysis: purchase conversion by price range.
-5. RFM analysis: customer value scoring and segmentation.
-6. Business recommendations: conversion, pricing, retention, and reactivation strategies.
+1. Which stage loses the most users in the view-to-purchase journey?
+2. How do conversion rates differ by price band and brand?
+3. Which customer segments should receive retention or reactivation actions?
+
+## Data and quality rules
+
+- Source file: `2019-Nov.csv`; raw data is not included because of its size.
+- Place the CSV in `data/2019-Nov.csv` before running the notebook.
+- The analysis removes duplicate rows, invalid event types, missing user IDs or timestamps, and non-positive prices.
+- Metric definitions and dashboard design are documented in [docs/methodology.md](docs/methodology.md).
+
+## Key insights and actions
+
+| Evidence | Insight | Suggested action |
+| --- | --- | --- |
+| Funnel conversion | The largest loss is before users add an item to cart. | Improve product detail pages, recommendations, and add-to-cart prompts. |
+| Price-band conversion | The 100–300 band has the highest conversion in the sample. | Prioritize merchandising and promotion tests in this band. |
+| RFM segments | Champion and Loyal users have stronger value; At Risk users need attention. | Offer loyalty benefits to high-value users and targeted reminders or coupons to At Risk users. |
+| Brand comparison | High traffic and high conversion are not always the same. | Evaluate advertising allocation with both traffic and conversion. |
 
 ## Visualizations
 
-### User Behavior Funnel
+| Funnel | Price conversion |
+| --- | --- |
+| ![User behavior funnel](images/behavior_funnel.png) | ![Price range conversion](images/price_range_conversion.svg) |
 
-![User Behavior Funnel](images/behavior_funnel.png)
+| RFM customer segments | Brand purchase rate |
+| --- | --- |
+| ![RFM customer segmentation](images/rfm_segments.png) | ![Brand purchase rate](images/brand_purchase_rate.png) |
 
-### Price Range Conversion
+## Reproduce the analysis
 
-![Price Range Conversion](images/price_range_conversion.svg)
+```bash
+python -m pip install -r requirements.txt
+jupyter notebook notebook/analy.ipynb
+```
 
-### RFM Customer Segmentation
+The notebook uses reusable helpers in `src/analysis_helpers.py` and supports launching Jupyter from either the project root or the `notebook/` directory. Run its regression checks with:
 
-![RFM Customer Segmentation](images/rfm_segments.png)
+```bash
+python -m unittest tests/test_analysis_helpers.py -v
+```
 
-### Brand Purchase Rate
+## SQL and dashboard evidence
 
-![Brand Purchase Rate](images/brand_purchase_rate.png)
+- [sql/analysis_queries.sql](sql/analysis_queries.sql): MySQL 8.0 queries for funnel, price-band, brand, and RFM inputs.
+- [docs/methodology.md](docs/methodology.md): data scope, metric definitions, quality rules, and a Power BI dashboard specification.
 
-## Key Insights
+The repository does **not** claim that a Power BI `.pbix` file exists. Add the actual dashboard file and screenshots before listing Power BI as a project deliverable.
 
-- Overall purchase conversion rate is low, about 1.46%, showing clear room for funnel optimization.
-- The main loss occurs after browsing, before users add products to cart.
-- Products in the 100-300 price range show the highest purchase conversion rate.
-- RFM segmentation identifies Champion, Loyal, Big Spender, Recent, Potential, and At Risk users.
-- High-value users contribute stronger purchase frequency and monetary value, while At Risk users require reactivation.
+## Project structure
 
-## Business Recommendations
-
-- Optimize product detail pages and recommendation logic to improve view-to-cart conversion.
-- Focus marketing and inventory resources on the 100-300 price range.
-- Build VIP benefits and personalized offers for Champion and Loyal users.
-- Use coupons, push notifications, and remarketing campaigns to reactivate At Risk users.
-- Compare high-traffic brands and high-conversion brands separately when planning advertising budget.
+```text
+user-behavior-analysis/
+├── docs/                  # Metric definitions and dashboard specification
+├── images/                # Analysis visualizations
+├── notebook/              # Jupyter analysis notebook and RFM output
+├── sql/                   # Reproducible MySQL analysis queries
+├── src/                   # Reusable cleaning and funnel helpers
+├── tests/                 # Regression checks for core calculations
+├── requirements.txt
+└── README.md
+```
 
 ## Tools
 
-- Python
-- Pandas
-- Matplotlib
-- Jupyter Notebook
-
-## Project Structure
-
-```text
-User-Behavior-Analysis/
-|-- data/          # Raw dataset, not uploaded
-|-- images/        # Visualization results
-|-- notebook/      # Jupyter analysis notebook
-`-- README.md      # Project documentation
-```
-
-## Author
-
-SHAXIAOGUANG-AI
-
-Project link: https://github.com/SHAXIAOGUANG-AI/user-behavior-analysis
+- Python: Pandas, Matplotlib, Jupyter Notebook
+- SQL: MySQL 8.0 query scripts
